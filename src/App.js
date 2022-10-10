@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import ProductOperations from './pages/ProductOperations';
 
-function App() {
+import Home from './pages/Home';
+import Product from './pages/Product';
+import Products from './pages/Products';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <div className='md:flex  justify-start container mx-auto max-w-6xl p-3 mt-5'>
+        <div className='side md:w-1/5 md:h-[60vh] mr-5 mb-5'>
+          <Sidebar />
+        </div>
+        <div className='pages md:w-4/5'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/products' element={<Products />}></Route>
+            <Route
+              path='/products/actions/:productID/:opID'
+              element={<ProductOperations />}
+            />
+            <Route path='/products/:productID' element={<Product />} />
+          </Routes>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
 export default App;
